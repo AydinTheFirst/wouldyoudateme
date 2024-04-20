@@ -1,0 +1,76 @@
+import { useEffect, useState } from "preact/hooks";
+
+export const App = () => {
+  const [saidYes, setSaidYes] = useState(false);
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    document.title = "Would you like to go out with me?";
+
+    const noBtn = document.querySelector("#no") as HTMLButtonElement;
+
+    const handler = () => {
+      setCounter((prev) => prev + 1);
+      noBtn.style.position = "absolute";
+      const top = Math.random() * window.innerHeight - noBtn.clientHeight;
+      noBtn.style.top = top + "px";
+      const left = Math.random() * window.innerWidth - noBtn.clientWidth;
+      noBtn.style.left = left + "px";
+    };
+
+    noBtn?.addEventListener("click", handler);
+    noBtn?.addEventListener("mouseover", handler);
+    noBtn?.addEventListener("touchstart", handler);
+
+    return () => {
+      noBtn?.removeEventListener("click", handler);
+      noBtn?.removeEventListener("mouseover", handler);
+      noBtn?.removeEventListener("touchstart", handler);
+    };
+  }, []);
+
+  if (saidYes) return <SaidYes />;
+
+  return (
+    <>
+      <div className="h-screen container grid place-items-center">
+        <h1 className={"text-4xl text-white text-center"}>
+          Benimle dışarı çıkmak ister misin?
+        </h1>
+        <div>
+          <img
+            src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmZ0b2ZoaDA1YmozaGMwYmNwbDNleXJsYnpsdWE2OHVtbHVzNmNkZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif"
+            alt=""
+          />
+        </div>
+        <div className={"flex justify-center gap-1"}>
+          <button
+            className={"button"}
+            onClick={() => {
+              setSaidYes(true);
+            }}
+          >
+            Evet
+          </button>
+          <button id={"no"} className={"button"}>
+            Hayır
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const SaidYes = () => {
+  return (
+    <div className="h-screen container grid place-items-center">
+      <h1 className={"text-4xl text-white text-center"}>
+        Bunu duyduğuma çok sevindim! 🥰
+      </h1>
+      <img
+        src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif"
+        alt=""
+      />
+    </div>
+  );
+};
