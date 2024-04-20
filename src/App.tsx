@@ -31,7 +31,7 @@ export const App = () => {
 
   return (
     <>
-      <div className="h-screen container grid place-items-center">
+      <div className="h-[100dvh] container grid place-items-center">
         <h1 className={"text-4xl text-white text-center"}>
           Benimle dışarı çıkmak ister misin?
         </h1>
