@@ -2,7 +2,6 @@ import { useEffect, useState } from "preact/hooks";
 
 export const App = () => {
   const [saidYes, setSaidYes] = useState(false);
-  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     document.title = "Would you like to go out with me?";
@@ -10,7 +9,6 @@ export const App = () => {
     const noBtn = document.querySelector("#no") as HTMLButtonElement;
 
     const handler = () => {
-      setCounter((prev) => prev + 1);
       noBtn.style.position = "absolute";
       const top = Math.random() * window.innerHeight - noBtn.clientHeight;
       noBtn.style.top = top + "px";
