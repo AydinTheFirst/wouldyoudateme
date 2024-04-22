@@ -35,8 +35,10 @@ export const App = () => {
     };
   }, []);
 
-  const handleYes = () => {
-    fetch(
+  const handleYes = async () => {
+    setSaidYes(true);
+
+    await fetch(
       "https://aydinthefirst-wouldyoudateme-server.bdmstf.easypanel.host/send-mail",
       {
         headers: {
@@ -44,8 +46,6 @@ export const App = () => {
         },
       }
     );
-
-    setSaidYes(true);
   };
 
   if (saidYes) return <SaidYes />;
