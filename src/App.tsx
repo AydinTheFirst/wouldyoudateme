@@ -2,6 +2,14 @@ import { useEffect, useState } from "preact/hooks";
 
 export const App = () => {
   const [saidYes, setSaidYes] = useState(false);
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    if (name) return;
+    const n = prompt("İsim");
+    if (!n) location.reload();
+    setName(n!);
+  }, []);
 
   useEffect(() => {
     document.title = "Would you like to go out with me?";
@@ -27,6 +35,19 @@ export const App = () => {
     };
   }, []);
 
+  const handleYes = () => {
+    fetch(
+      "https://aydinthefirst-wouldyoudateme-server.bdmstf.easypanel.host/send-mail",
+      {
+        headers: {
+          "x-visitor-name": name,
+        },
+      }
+    );
+
+    setSaidYes(true);
+  };
+
   if (saidYes) return <SaidYes />;
 
   return (
@@ -42,12 +63,7 @@ export const App = () => {
           />
         </div>
         <div className={"flex justify-center gap-1"}>
-          <button
-            className={"button"}
-            onClick={() => {
-              setSaidYes(true);
-            }}
-          >
+          <button className={"button"} onClick={handleYes}>
             Evet
           </button>
           <button id={"no"} className={"button"}>
@@ -63,7 +79,7 @@ const SaidYes = () => {
   return (
     <div className="h-screen container grid place-items-center">
       <h1 className={"text-4xl text-white text-center"}>
-        Bunu duyduğuma çok sevindim! 🥰
+        Bunu duyduğuma çok sevindim!
       </h1>
       <img
         src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif"
