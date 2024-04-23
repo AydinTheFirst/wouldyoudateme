@@ -79,7 +79,7 @@ const SaidYes = () => {
   return (
     <div className="h-screen container grid place-items-center">
       <h1 className={"text-4xl text-white text-center"}>
-        Bunu duyduğuma çok sevindim!
+        Hayır diyemeyeceğini biliyordum!
       </h1>
       <img
         src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif"
