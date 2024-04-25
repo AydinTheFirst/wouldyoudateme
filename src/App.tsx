@@ -2,14 +2,6 @@ import { useEffect, useState } from "preact/hooks";
 
 export const App = () => {
   const [saidYes, setSaidYes] = useState(false);
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    if (name) return;
-    const n = prompt("İsim");
-    if (!n) location.reload();
-    setName(n!);
-  }, []);
 
   useEffect(() => {
     document.title = "Would you like to go out with me?";
@@ -39,12 +31,7 @@ export const App = () => {
     setSaidYes(true);
 
     await fetch(
-      "https://aydinthefirst-wouldyoudateme-server.bdmstf.easypanel.host/send-mail",
-      {
-        headers: {
-          "x-visitor-name": name,
-        },
-      }
+      "https://aydinthefirst-wouldyoudateme-server.bdmstf.easypanel.host/send-mail"
     );
   };
 
